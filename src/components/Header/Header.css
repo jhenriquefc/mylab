@@ -1,0 +1,140 @@
+/* HEADER BASE */
+.header {
+  position: relative;
+  height: 100px;
+  background: radial-gradient(circle at center, #020617, #01040a);
+  border-bottom: 1px solid rgba(0, 255, 166, 0.2);
+}
+
+/* GRID */
+.grid-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background-image:
+    linear-gradient(rgba(0, 255, 166, 0.6) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 217, 255, 0.6) 1px, transparent 1px);
+  background-size: 40px 40px;
+  animation: moveGrid 20s linear infinite, pulseGrid 4s ease-in-out infinite alternate;
+  pointer-events: none;
+}
+
+@keyframes moveGrid {
+  from { background-position: 0 0, 0 0; }
+  to { background-position: 0 40px, 40px 0; }
+}
+
+@keyframes pulseGrid {
+  0% { opacity: 0.4; filter: drop-shadow(0 0 1px rgba(0, 255, 166, 0.2)); }
+  100% { opacity: 0.8; filter: drop-shadow(0 0 5px rgba(0, 255, 166, 0.6)); }
+}
+
+/* CONTEÚDO DO HEADER */
+.header-content {
+  position: relative;
+  z-index: 2;
+  height: 100%;
+  padding: 0 40px;
+  display: flex;
+  align-items: center; 
+  justify-content: space-between;
+}
+
+/* --- AJUSTE NA LOGO-LINK (Para o clique funcionar) --- */
+.logo-link {
+  text-decoration: none; /* Remove o sublinhado do link */
+  color: inherit;        /* Mantém a cor definida no h1 */
+  display: block;
+  z-index: 10;
+}
+
+/* LOGO */
+h1.logo {
+  display: flex; 
+  align-items: baseline;
+  margin: 0;
+  padding: 0;
+  cursor: pointer;
+  font-size: 32px;
+  font-weight: 700;
+  font-family: 'Segoe UI', sans-serif;
+  color: #ffffff;
+  position: relative;
+  
+  /* SOLUÇÃO DO BUG DE TAMANHO: */
+  line-height: 1;         
+  height: auto;          
+  overflow: visible;     
+  transition: 0.3s;
+}
+
+h1.logo span {
+  font-size: 14px;
+  font-weight: 400;
+  margin-left: 8px;
+  color: #cfcfcf;
+  transition: 0.3s;
+  line-height: 1;
+}
+
+/* O hover agora deve ser ativado quando passamos o mouse no link ou no h1 */
+.logo-link:hover h1.logo {
+  color: #00d9ff;
+  text-shadow: 0 0 10px #00ffa6, 0 0 20px rgba(0, 217, 255, 0.6);
+}
+
+.logo-link:hover h1.logo span {
+  color: #ffffff;
+}
+
+/* Barra da Logo */
+h1.logo::after {
+  content: "";
+  position: absolute;
+  width: 0%;
+  height: 3px;
+  left: 0;
+  bottom: -4px; 
+  background: linear-gradient(90deg, #00ffa6, #00d9ff, #9b5cff);
+  transition: 0.3s;
+}
+
+.logo-link:hover h1.logo::after {
+  width: 100%;
+}
+
+/* MENU */
+.menu {
+  display: flex;
+  gap: 25px;
+  align-items: center;
+}
+
+.menu a {
+  text-decoration: none;
+  font-size: 15px;
+  color: #eaeaea;
+  position: relative;
+  transition: 0.3s;
+  line-height: 1;
+}
+
+.menu a:hover {
+  color: #00d9ff;
+  text-shadow: 0 0 8px #00d9ff;
+}
+
+.menu a::after {
+  content: "";
+  position: absolute;
+  width: 0%;
+  height: 2px;
+  left: 0;
+  bottom: -4px;
+  background: linear-gradient(90deg, #00ffa6, #00d9ff, #9b5cff);
+  transition: 0.3s;
+}
+
+.menu a:hover::after {
+  width: 100%;
+}

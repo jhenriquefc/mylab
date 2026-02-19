@@ -1,0 +1,151 @@
+.contact-portal {
+  display: flex;
+  justify-content: center;
+  padding: 40px 20px;
+}
+
+/* --- ADICIONADO: ANIMAÇÃO DE ENTRADA --- */
+.portal-container {
+  width: 100%;
+  max-width: 700px;
+  background: rgba(15, 23, 42, 0.8);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 4px;
+  padding: 50px;
+  position: relative;
+  
+  /* Estado inicial para animação */
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.portal-container.animate-in {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Detalhe nos cantos */
+.portal-container::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; width: 20px; height: 20px;
+  border-top: 2px solid #00ffa6; border-left: 2px solid #00ffa6;
+}
+
+.connection-status {
+  font-family: 'Fira Code', monospace;
+  font-size: 11px;
+  color: #00ffa6;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 15px;
+}
+
+.pulse-dot {
+  width: 6px; height: 6px;
+  background: #00ffa6;
+  border-radius: 50%;
+  box-shadow: 0 0 10px #00ffa6;
+  animation: pulse 2s infinite;
+}
+
+/* --- FEEDBACK DE SUCESSO --- */
+.pulse-dot.success {
+  background: #00ffa6;
+  box-shadow: 0 0 20px #00ffa6, 0 0 40px #00ffa6;
+}
+
+.portal-title {
+  font-size: 28px;
+  color: #fff;
+  margin-bottom: 10px;
+}
+
+.portal-desc {
+  color: #94a3b8;
+  font-size: 14px;
+  margin-bottom: 40px;
+}
+
+.input-group {
+  margin-bottom: 25px;
+  display: flex;
+  flex-direction: column;
+}
+
+.input-group label {
+  font-family: 'Fira Code', monospace;
+  font-size: 10px;
+  color: #64748b;
+  margin-bottom: 8px;
+  letter-spacing: 1px;
+}
+
+.portal-form input, .portal-form select, .portal-form textarea {
+  background: rgba(2, 6, 23, 0.5);
+  border: 1px solid #1e293b;
+  padding: 12px 15px;
+  color: #929292;
+  border-radius: 4px;
+  outline: none;
+  transition: all 0.3s ease; 
+}
+
+/* --- HOVER E FOCUS --- */
+.portal-form input:hover, .portal-form select:hover, .portal-form textarea:hover {
+  border-color: rgba(0, 255, 166, 0.3);
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.portal-form input:focus, .portal-form textarea:focus {
+  border-color: #00ffa6;
+  background: rgba(0, 255, 166, 0.05);
+  box-shadow: 0 0 15px rgba(0, 255, 166, 0.1);
+  transform: translateX(4px); 
+}
+
+.input-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.portal-button {
+  width: 100%;
+  padding: 15px;
+  background: transparent;
+  border: 1px solid #00ffa6;
+  color: #00ffa6;
+  font-family: 'Fira Code', monospace;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s;
+  margin-top: 20px;
+  position: relative;
+  overflow: hidden;
+}
+
+.portal-button:hover {
+  background: #00ffa6;
+  color: #020617;
+  box-shadow: 0 0 25px rgba(0, 255, 166, 0.5);
+  letter-spacing: 2px; /* Efeito de expansão no texto */
+}
+
+.portal-button:active {
+  transform: scale(0.98);
+}
+
+@keyframes pulse {
+  0% { opacity: 1; }
+  50% { opacity: 0.3; }
+  100% { opacity: 1; }
+}
+
+@media (max-width: 600px) {
+  .input-row { grid-template-columns: 1fr; }
+  .portal-container { padding: 30px; }
+}
