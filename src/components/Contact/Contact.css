@@ -1,0 +1,275 @@
+.contact-portal {
+  display: flex;
+  justify-content: center;
+  padding: 40px 20px;
+}
+
+/* --- ADICIONADO: ANIMAÇÃO DE ENTRADA E NOVO TAMANHO --- */
+.portal-container {
+  width: 100%;
+  max-width: 1100px; /* Aumentado para caber o painel lateral */
+  background: rgba(15, 23, 42, 0.8);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 4px;
+  padding: 50px;
+  position: relative;
+  
+  /* Estado inicial para animação */
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.portal-container.animate-in {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Detalhe nos cantos */
+.portal-container::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; width: 20px; height: 20px;
+  border-top: 2px solid #00ffa6; border-left: 2px solid #00ffa6;
+}
+
+.connection-status {
+  font-family: 'Fira Code', monospace;
+  font-size: 11px;
+  color: #00ffa6;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 15px;
+}
+
+.pulse-dot {
+  width: 6px; height: 6px;
+  background: #00ffa6;
+  border-radius: 50%;
+  box-shadow: 0 0 10px #00ffa6;
+  animation: pulse 2s infinite;
+}
+
+/* --- FEEDBACK DE SUCESSO --- */
+.pulse-dot.success {
+  background: #00ffa6;
+  box-shadow: 0 0 20px #00ffa6, 0 0 40px #00ffa6;
+}
+
+.portal-title {
+  font-size: 28px;
+  color: #fff;
+  margin-bottom: 10px;
+}
+
+.portal-desc {
+  color: #94a3b8;
+  font-size: 14px;
+  margin-bottom: 10px;
+}
+
+/* =========================================
+   LAYOUT DE DUAS COLUNAS (Form + Info)
+   ========================================= */
+.contact-layout {
+  display: grid;
+  grid-template-columns: 1.3fr 1fr; /* Form um pouco mais largo que o painel */
+  gap: 60px;
+  margin-top: 40px;
+}
+
+/* =========================================
+   COLUNA ESQUERDA: FORMULÁRIO
+   ========================================= */
+.input-group {
+  margin-bottom: 25px;
+  display: flex;
+  flex-direction: column;
+}
+
+.input-group label {
+  font-family: 'Fira Code', monospace;
+  font-size: 10px;
+  color: #64748b;
+  margin-bottom: 8px;
+  letter-spacing: 1px;
+}
+
+.portal-form input, .portal-form select, .portal-form textarea {
+  background: rgba(2, 6, 23, 0.5);
+  border: 1px solid #1e293b;
+  padding: 12px 15px;
+  color: #929292;
+  border-radius: 4px;
+  outline: none;
+  transition: all 0.3s ease; 
+}
+
+.portal-form textarea {
+  min-height: 120px;
+  resize: vertical;
+}
+
+/* --- HOVER E FOCUS --- */
+.portal-form input:hover, .portal-form select:hover, .portal-form textarea:hover {
+  border-color: rgba(0, 255, 166, 0.3);
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.portal-form input:focus, .portal-form textarea:focus {
+  border-color: #00ffa6;
+  background: rgba(0, 255, 166, 0.05);
+  box-shadow: 0 0 15px rgba(0, 255, 166, 0.1);
+  transform: translateX(4px); 
+}
+
+.input-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.portal-button {
+  width: 100%;
+  padding: 15px;
+  background: transparent;
+  border: 1px solid #00ffa6;
+  color: #00ffa6;
+  font-family: 'Fira Code', monospace;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s;
+  margin-top: 10px;
+  position: relative;
+  overflow: hidden;
+}
+
+.portal-button:hover {
+  background: #00ffa6;
+  color: #020617;
+  box-shadow: 0 0 25px rgba(0, 255, 166, 0.5);
+  letter-spacing: 2px;
+}
+
+.portal-button:active {
+  transform: scale(0.98);
+}
+
+/* =========================================
+   COLUNA DIREITA: PAINEL DE INFO
+   ========================================= */
+.portal-info-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+.info-block h3 {
+  color: #00ffa6;
+  font-family: 'Fira Code', monospace;
+  font-size: 13px;
+  margin-bottom: 20px;
+  letter-spacing: 1px;
+  border-bottom: 1px solid rgba(0, 255, 166, 0.2);
+  padding-bottom: 8px;
+}
+
+.info-links {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.info-links li {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.info-label {
+  color: #475569;
+  font-size: 11px;
+  font-family: 'Fira Code', monospace;
+  font-weight: bold;
+}
+
+.info-links a {
+  color: #e2e8f0;
+  text-decoration: none;
+  font-size: 14px;
+  transition: 0.3s;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.info-links a:hover {
+  color: #00d9ff;
+  text-shadow: 0 0 10px rgba(0, 217, 255, 0.4);
+  transform: translateX(5px);
+  display: inline-block;
+}
+
+/* TERMINAL FALSO */
+.fake-terminal {
+  background: #020617;
+  border: 1px solid #1e293b;
+  border-radius: 6px;
+  padding: 20px;
+  font-family: 'Fira Code', monospace;
+  font-size: 12px;
+  color: #94a3b8;
+  line-height: 1.8;
+  box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.5);
+}
+
+.fake-terminal p {
+  margin: 0;
+}
+
+.status-online { color: #00ffa6; }
+.status-heating { color: #f59e0b; }
+
+.blinking-cursor {
+  display: inline-block;
+  width: 8px;
+  height: 15px;
+  background-color: #00ffa6;
+  animation: blink 1s step-end infinite;
+  vertical-align: middle;
+  margin-left: 5px;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+@keyframes pulse {
+  0% { opacity: 1; }
+  50% { opacity: 0.3; }
+  100% { opacity: 1; }
+}
+
+/* =========================================
+   RESPONSIVIDADE (Celular e Tablets)
+   ========================================= */
+@media (max-width: 900px) {
+  .contact-layout {
+    grid-template-columns: 1fr; /* Empilha no celular */
+    gap: 50px;
+  }
+  
+  /* Form fica em cima, Painel embaixo */
+  .portal-form { order: 1; }
+  .portal-info-panel { order: 2; }
+}
+
+@media (max-width: 600px) {
+  .input-row { grid-template-columns: 1fr; }
+  .portal-container { padding: 30px 20px; }
+  .portal-title { font-size: 24px; }
+}

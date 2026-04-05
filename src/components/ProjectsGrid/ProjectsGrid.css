@@ -1,0 +1,175 @@
+.projects-section {
+  padding: 80px 40px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.section-header {
+  margin-bottom: 40px;
+  text-align: left;
+}
+
+.section-subtitle {
+  color: #00ffa6;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.section-title {
+  font-size: 36px;
+  color: #ffffff;
+  margin-top: 10px;
+}
+
+/* ESTRUTURA BENTO GRID */
+.bento-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  /* Aumentei a altura base para caberem as imagens e os textos confortavelmente */
+  grid-auto-rows: 320px; 
+  gap: 20px;
+}
+
+/* BASE DO CARD - Padding removido para a imagem colar na borda */
+.bento-card {
+  position: relative;
+  background: rgba(15, 23, 42, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 16px;
+  padding: 0; /* ZERADO: O padding foi para o .card-content */
+  overflow: hidden;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  display: flex;
+  flex-direction: column;
+}
+
+/* ÁREA DAS IMAGENS */
+.card-image-single {
+  width: 100%;
+  height: 160px; /* Altura da imagem nos cards médios */
+  overflow: hidden;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.large .card-image-single {
+  height: 300px; /* Card maior precisa de uma imagem mais alta */
+}
+
+.card-image-single img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s ease;
+}
+
+/* GRID DE 4 IMAGENS DO 3D */
+.card-image-grid {
+  width: 100%;
+  height: 160px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  gap: 2px; /* Espaço mínimo entre as 4 fotinhos */
+  background: rgba(255, 255, 255, 0.05); /* Fundo caso a imagem demore a carregar */
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.grid-img-wrapper {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.card-image-grid img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s ease;
+}
+
+/* EFEITO DE ZOOM NAS FOTOS AO PASSAR O MOUSE */
+.bento-card:hover .card-image-single img,
+.bento-card:hover .grid-img-wrapper img {
+  transform: scale(1.08);
+}
+
+/* CONTEÚDO DE TEXTO - Agora com o padding para afastar da borda */
+.card-content {
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  padding: 25px;
+  flex: 1; /* Preenche o resto do espaço vazio do card */
+}
+
+.large { grid-column: span 2; grid-row: span 2; }
+.medium { grid-column: span 2; grid-row: span 1; }
+
+.bento-card:hover {
+  transform: translateY(-5px);
+  background: rgba(15, 23, 42, 0.7);
+  border-color: rgba(0, 217, 255, 0.5);
+}
+
+.card-header {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 15px;
+}
+
+.card-icon { font-size: 32px; }
+
+.bento-card h3 {
+  color: #f8fafc;
+  font-size: 1.3rem;
+  margin: 0;
+}
+
+.bento-card p {
+  color: #94a3b8;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  margin-bottom: auto;
+}
+
+.tech-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 20px;
+}
+
+.tech-tag {
+  font-size: 11px;
+  font-family: 'Courier New', Courier, monospace;
+  color: #00ffa6;
+  background: rgba(0, 255, 166, 0.05);
+  padding: 6px 12px;
+  border-radius: 6px;
+  border: 1px solid rgba(0, 255, 166, 0.15);
+}
+
+.card-border-glow {
+  position: absolute;
+  top: 0; left: 0; width: 100%; height: 100%;
+  background: radial-gradient(circle at 50% 50%, rgba(0, 217, 255, 0.08) 0%, transparent 60%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.bento-card:hover .card-border-glow { opacity: 1; }
+
+@media (max-width: 900px) {
+  .bento-grid { 
+    grid-template-columns: 1fr; 
+    grid-auto-rows: auto;
+  }
+  .large, .medium { 
+    grid-column: span 1; 
+  }
+}
