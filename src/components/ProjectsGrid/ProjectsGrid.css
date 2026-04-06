@@ -27,41 +27,33 @@
 .bento-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  /* Aumentei a altura base para caberem as imagens e os textos confortavelmente */
   grid-auto-rows: 320px; 
   gap: 20px;
 }
 
-/* BASE DO CARD - Padding removido para a imagem colar na borda */
 .bento-card {
   position: relative;
   background: rgba(15, 23, 42, 0.4);
   border: 1px solid rgba(255, 255, 255, 0.05);
   border-radius: 16px;
-  padding: 0; /* ZERADO: O padding foi para o .card-content */
+  padding: 0; 
   overflow: hidden;
   transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   display: flex;
   flex-direction: column;
 }
 
+.clickable-card {
+  text-decoration: none;
+  cursor: pointer;
+}
+
 /* ÁREA DAS IMAGENS */
 .card-image-single {
   width: 100%;
-  height: 160px; /* Altura da imagem nos cards médios */
+  height: 160px;
   overflow: hidden;
   border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-}
-
-.large .card-image-single {
-  height: 300px; /* Card maior precisa de uma imagem mais alta */
-}
-
-.card-image-single img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: transform 0.6s ease;
 }
 
 /* GRID DE 4 IMAGENS DO 3D */
@@ -71,9 +63,15 @@
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-template-rows: 1fr 1fr;
-  gap: 2px; /* Espaço mínimo entre as 4 fotinhos */
-  background: rgba(255, 255, 255, 0.05); /* Fundo caso a imagem demore a carregar */
+  gap: 2px;
+  background: rgba(255, 255, 255, 0.05); 
   border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* Como o 3D agora é o 'large', a imagem dele precisa ser mais alta no PC */
+.large .card-image-single,
+.large .card-image-grid {
+  height: 300px;
 }
 
 .grid-img-wrapper {
@@ -82,6 +80,7 @@
   overflow: hidden;
 }
 
+.card-image-single img,
 .card-image-grid img {
   width: 100%;
   height: 100%;
@@ -89,19 +88,18 @@
   transition: transform 0.6s ease;
 }
 
-/* EFEITO DE ZOOM NAS FOTOS AO PASSAR O MOUSE */
 .bento-card:hover .card-image-single img,
 .bento-card:hover .grid-img-wrapper img {
   transform: scale(1.08);
 }
 
-/* CONTEÚDO DE TEXTO - Agora com o padding para afastar da borda */
+/* CONTEÚDO DE TEXTO */
 .card-content {
   z-index: 2;
   display: flex;
   flex-direction: column;
   padding: 25px;
-  flex: 1; /* Preenche o resto do espaço vazio do card */
+  flex: 1; 
 }
 
 .large { grid-column: span 2; grid-row: span 2; }
@@ -164,12 +162,51 @@
 
 .bento-card:hover .card-border-glow { opacity: 1; }
 
+/* =========================================
+   RESPONSIVIDADE (O Respiro do Celular)
+   ========================================= */
 @media (max-width: 900px) {
+  /* Reduz o espaçamento lateral da seção para não espremer no celular */
+  .projects-section {
+    padding: 60px 20px;
+  }
+  
   .bento-grid { 
     grid-template-columns: 1fr; 
     grid-auto-rows: auto;
   }
+  
   .large, .medium { 
     grid-column: span 1; 
+    grid-row: span 1;
+  }
+
+  /* Impede que a foto do card principal fique gigante no celular */
+  .large .card-image-single,
+  .large .card-image-grid {
+    height: 200px; 
+  }
+
+  /* Ajustes no padding interno e nos textos para caberem perfeitamente */
+  .card-content {
+    padding: 20px 15px; 
+  }
+
+  .bento-card h3 {
+    font-size: 1.2rem;
+  }
+
+  .bento-card p {
+    font-size: 0.9rem; /* Leitura mais macia no celular */
+  }
+
+  .tech-tags {
+    gap: 6px;
+    margin-top: 15px;
+  }
+
+  .tech-tag {
+    padding: 4px 8px;
+    font-size: 10px;
   }
 }

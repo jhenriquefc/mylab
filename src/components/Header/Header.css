@@ -40,10 +40,10 @@
   justify-content: space-between;
 }
 
-/* --- AJUSTE NA LOGO-LINK (Para o clique funcionar) --- */
+/* --- AJUSTE NA LOGO-LINK --- */
 .logo-link {
-  text-decoration: none; /* Remove o sublinhado do link */
-  color: inherit;        /* Mantém a cor definida no h1 */
+  text-decoration: none; 
+  color: inherit;        
   display: block;
   z-index: 10;
 }
@@ -60,31 +60,35 @@ h1.logo {
   font-family: 'Segoe UI', sans-serif;
   color: #ffffff;
   position: relative;
-  
-  /* SOLUÇÃO DO BUG DE TAMANHO: */
   line-height: 1;        
   height: auto;          
   overflow: visible;     
   transition: 0.3s;
 }
 
-h1.logo span {
+/* NOVO: ESTILO DO BADGE "// Portfolio" */
+.logo-badge {
   font-size: 14px;
-  font-weight: 400;
+  color: #00ffa6;
+  font-family: 'Fira Code', monospace; /* Fonte de código */
+  font-weight: normal;
+  letter-spacing: 1px;
+  opacity: 0.8;
   margin-left: 8px;
-  color: #cfcfcf;
   transition: 0.3s;
   line-height: 1;
 }
 
-/* O hover agora deve ser ativado quando passamos o mouse no link ou no h1 */
+/* HOVER DA LOGO E DO BADGE */
 .logo-link:hover h1.logo {
   color: #00d9ff;
   text-shadow: 0 0 10px #00ffa6, 0 0 20px rgba(0, 217, 255, 0.6);
 }
 
-.logo-link:hover h1.logo span {
+.logo-link:hover .logo-badge {
   color: #ffffff;
+  opacity: 1;
+  text-shadow: 0 0 8px rgba(255, 255, 255, 0.5);
 }
 
 /* Barra da Logo */
@@ -117,25 +121,36 @@ h1.logo::after {
   position: relative;
   transition: 0.3s;
   line-height: 1;
+  padding-bottom: 4px; /* Dá um respiro para a linha não colar no texto */
 }
 
+/* Hover Padrão */
 .menu a:hover {
   color: #00d9ff;
   text-shadow: 0 0 8px #00d9ff;
 }
 
+/* NOVO: PÁGINA ATIVA (NavLink) */
+.menu a.active {
+  color: #00ffa6;
+  text-shadow: 0 0 10px rgba(0, 255, 166, 0.4);
+}
+
+/* Linha inferior (Hover e Ativo) */
 .menu a::after {
   content: "";
   position: absolute;
   width: 0%;
   height: 2px;
   left: 0;
-  bottom: -4px;
+  bottom: 0;
   background: linear-gradient(90deg, #00ffa6, #00d9ff, #9b5cff);
   transition: 0.3s;
 }
 
-.menu a:hover::after {
+/* Anima a linha no hover e mantem ela 100% preenchida na página ativa */
+.menu a:hover::after,
+.menu a.active::after {
   width: 100%;
 }
 
@@ -143,35 +158,31 @@ h1.logo::after {
    RESPONSIVIDADE (Telas Menores)
    ========================================= */
 @media (max-width: 768px) {
-  /* Permite que o Header cresça caso o menu tenha muitos itens */
   .header {
     height: auto;
     min-height: 100px;
     padding: 15px 0;
   }
 
-  /* Muda de lado-a-lado para empilhado (coluna) */
   .header-content {
     flex-direction: column;
     justify-content: center;
-    padding: 0 20px; /* Reduz o padding lateral para o mobile */
-    gap: 15px; /* Dá um respiro entre a logo e os links */
+    padding: 0 20px; 
+    gap: 15px; 
   }
 
-  /* Reduz um pouco o tamanho da logo para caber melhor */
   h1.logo {
     font-size: 26px;
   }
   
-  h1.logo span {
+  .logo-badge {
     font-size: 12px;
   }
 
-  /* Permite que os links quebrem de linha e fiquem centralizados */
   .menu {
     flex-wrap: wrap;
     justify-content: center;
-    gap: 15px; /* Reduz o espaço entre os links */
+    gap: 15px; 
   }
   
   .menu a {

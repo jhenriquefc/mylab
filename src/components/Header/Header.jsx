@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import "./Header.css";
 
 export default function Header() {
@@ -7,20 +7,22 @@ export default function Header() {
       <div className="grid-bg"></div>
 
       <div className="header-content">
+        {/* A logo continua usando Link normal para sempre voltar pra Home */}
         <Link to="/" className="logo-link">
           <h1 className="logo">
-            MyLab <span>- By José Carvalho</span>
+            MyLab <span className="logo-badge">// Portfolio</span>
           </h1>
         </Link>
 
         <nav className="menu">
-          <Link to="/">Home</Link>
+          {/* NavLink sabe automaticamente quando está ativo */}
+          <NavLink to="/">Home</NavLink>
           
-          <Link to="/projetos">Projetos</Link>
+          <NavLink to="/projetos">Projetos 3D</NavLink>
           
-          <Link to="/sobre">Sobre</Link>
+          <NavLink to="/sobre">Sobre</NavLink>
           
-          <Link to="/contato">Contato</Link>
+          <NavLink to="/contato">Contato</NavLink>
         </nav>
       </div>
     </header>

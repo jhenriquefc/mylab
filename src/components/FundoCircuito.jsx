@@ -6,113 +6,117 @@ export default function FundoCircuito() {
   useEffect(() => {
     const canvas = canvasRef.current;
     const ctx = canvas.getContext("2d");
-    let particles = [];
-    const PARTICLE_COUNT = 150; 
     let W = window.innerWidth;
     let H = window.innerHeight;
 
     canvas.width = W;
     canvas.height = H;
 
-    // Cria partículas
-    for (let i = 0; i < PARTICLE_COUNT; i++) {
-      particles.push({
-        x: Math.random() * W,
-        y: Math.random() * H,
-        size: Math.random() * 2 + 1, 
-        speedX: (Math.random() - 0.5) * 0.8, 
-        speedY: (Math.random() - 0.5) * 0.8,
-        opacity: Math.random(),
-      });
+    // V2.1: Opacidade reduzida drasticamente (0.05 - 0.07) para virar marca d'água
+    const gears = [
+      { x: W * 0.1, y: H * 0.1, radius: 150, teeth: 16, speed: 0.002, angle: 0, color: "rgba(0, 255, 166, 0.07)" },
+      { x: W * 0.9, y: H * 0.2, radius: 250, teeth: 24, speed: -0.0015, angle: 0.5, color: "rgba(0, 217, 255, 0.05)" },
+      { x: W * 0.8, y: H * 0.9, radius: 180, teeth: 20, speed: 0.003, angle: 0, color: "rgba(0, 255, 166, 0.07)" },
+      { x: W * 0.15, y: H * 0.85, radius: 220, teeth: 22, speed: -0.001, angle: 1, color: "rgba(0, 217, 255, 0.05)" },
+      // Engrenagem central (fundo muito sutil)
+      { x: W * 0.5, y: H * 0.5, radius: 400, teeth: 36, speed: 0.0008, angle: 0, color: "rgba(255, 255, 255, 0.02)" },
+    ];
+
+    function drawGear(x, y, radius, teeth, angle, color) {
+      ctx.save();
+      ctx.translate(x, y);
+      ctx.rotate(angle);
+      
+      const innerRadius = radius * 0.85;
+      const holeRadius = radius * 0.4;
+      
+      // Linhas finas e elegantes
+      ctx.strokeStyle = color;
+      ctx.lineWidth = 1; 
+      ctx.lineJoin = "round";
+      
+      // 1. DESENHO DOS DENTES
+      ctx.beginPath();
+      for (let i = 0; i < teeth; i++) {
+        const a0 = (i / teeth) * Math.PI * 2;
+        const a1 = ((i + 0.2) / teeth) * Math.PI * 2;
+        const a2 = ((i + 0.5) / teeth) * Math.PI * 2;
+        const a3 = ((i + 0.7) / teeth) * Math.PI * 2;
+
+        if (i === 0) ctx.moveTo(Math.cos(a0) * innerRadius, Math.sin(a0) * innerRadius);
+        else ctx.lineTo(Math.cos(a0) * innerRadius, Math.sin(a0) * innerRadius);
+
+        ctx.lineTo(Math.cos(a1) * radius, Math.sin(a1) * radius);
+        ctx.lineTo(Math.cos(a2) * radius, Math.sin(a2) * radius);
+        ctx.lineTo(Math.cos(a3) * innerRadius, Math.sin(a3) * innerRadius);
+      }
+      ctx.closePath();
+      ctx.stroke();
+
+      // 2. EIXO CENTRAL (Círculo interno)
+      ctx.beginPath();
+      ctx.arc(0, 0, holeRadius, 0, Math.PI * 2);
+      ctx.stroke();
+
+      // 3. RAIOS DE SUSTENTAÇÃO
+      ctx.beginPath();
+      for (let i = 0; i < 5; i++) {
+        const a = (i / 5) * Math.PI * 2;
+        ctx.moveTo(Math.cos(a) * holeRadius, Math.sin(a) * holeRadius);
+        ctx.lineTo(Math.cos(a) * innerRadius, Math.sin(a) * innerRadius);
+      }
+      ctx.stroke();
+
+      // 4. Linha Guia Tracejada (Muito fina e sutil)
+      ctx.beginPath();
+      ctx.setLineDash([4, 8]); 
+      ctx.lineWidth = 0.5; // Metade da espessura para não poluir
+      ctx.arc(0, 0, radius * 0.92, 0, Math.PI * 2);
+      ctx.stroke();
+      ctx.setLineDash([]); 
+
+      // 5. Mira/Eixo Central (Crosshair)
+      ctx.beginPath();
+      ctx.lineWidth = 1;
+      const crossSize = holeRadius * 0.4;
+      ctx.moveTo(-crossSize, 0);
+      ctx.lineTo(crossSize, 0);
+      ctx.moveTo(0, -crossSize);
+      ctx.lineTo(0, crossSize);
+      ctx.stroke();
+
+      ctx.restore();
     }
 
-    function draw() {
+    // Loop de Animação
+    function animate() {
       ctx.clearRect(0, 0, W, H);
 
-      // 1. DESENHAR LINHAS
-      for (let i = 0; i < particles.length; i++) {
-        for (let j = i + 1; j < particles.length; j++) {
-          const dx = particles[i].x - particles[j].x;
-          const dy = particles[i].y - particles[j].y;
-          const dist = Math.sqrt(dx * dx + dy * dy);
-          
-          if (dist < 150) {
-            ctx.strokeStyle = `rgba(0, 217, 255, ${0.2 * (1 - dist / 150)})`;            
-            ctx.lineWidth = 0.8;
-            ctx.beginPath();
-            ctx.moveTo(particles[i].x, particles[i].y);
-            ctx.lineTo(particles[j].x, particles[j].y);
-            ctx.stroke();
-          }
-        }
-      }
-
-      // 2. DESENHAR PARTÍCULAS
-      particles.forEach((p) => {
-        ctx.beginPath();
-        ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
-        
-        ctx.fillStyle = `rgba(0, 255, 166, ${p.opacity})`;
-        ctx.fill();
-
-        // Brilho nas partículas
-        if (p.opacity > 0.8) {
-          ctx.shadowBlur = 10;
-          ctx.shadowColor = "#00ffa6";
-        } else {
-          ctx.shadowBlur = 0;
-        }
-
-        p.x += p.speedX;
-        p.y += p.speedY;
-
-        // Mantém dentro da tela
-        if (p.x < 0 || p.x > W) p.speedX *= -1;
-        if (p.y < 0 || p.y > H) p.speedY *= -1;
-
-        // Piscando suave ;)
-        if (Math.random() < 0.01) {
-          p.opacity = Math.random() * 0.5 + 0.2;
-        }
+      gears.forEach(gear => {
+        gear.angle += gear.speed;
+        drawGear(gear.x, gear.y, gear.radius, gear.teeth, gear.angle, gear.color);
       });
 
-      requestAnimationFrame(draw);
+      requestAnimationFrame(animate);
     }
 
-    draw();
-
-    const mouse = { x: 0, y: 0 };
-    function handleMouseMove(e) {
-      mouse.x = e.clientX;
-      mouse.y = e.clientY;
-
-      particles.forEach((p) => {
-        const dx = p.x - mouse.x;
-        const dy = p.y - mouse.y;
-        const dist = Math.sqrt(dx * dx + dy * dy);
-
-        if (dist < 120) {
-          const angle = Math.atan2(dy, dx);
-          const force = (120 - dist) / 20;
-          p.x += Math.cos(angle) * force;
-          p.y += Math.sin(angle) * force;
-          p.opacity = 1; 
-        }
-      });
-    }
-
-    window.addEventListener("mousemove", handleMouseMove);
+    animate();
 
     function handleResize() {
       W = window.innerWidth;
       H = window.innerHeight;
       canvas.width = W;
       canvas.height = H;
+      
+      gears[0].x = W * 0.1;  gears[0].y = H * 0.1;
+      gears[1].x = W * 0.9;  gears[1].y = H * 0.2;
+      gears[2].x = W * 0.8;  gears[2].y = H * 0.9;
+      gears[3].x = W * 0.15; gears[3].y = H * 0.85;
+      gears[4].x = W * 0.5;  gears[4].y = H * 0.5;
     }
     window.addEventListener("resize", handleResize);
 
     return () => {
-      window.removeEventListener("mousemove", handleMouseMove);
       window.removeEventListener("resize", handleResize);
     };
   }, []);
@@ -125,9 +129,10 @@ export default function FundoCircuito() {
         top: 0,
         left: 0,
         zIndex: -1,
-        width: "100%",
-        height: "100%",
-        background: "#020617", 
+        width: "100vw",
+        height: "100vh",
+        background: "#020617",
+        pointerEvents: "none"
       }}
     />
   );

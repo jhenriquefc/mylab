@@ -11,6 +11,20 @@ export default function Projects() {
       description: "Modelo de Pegboard personalizado para organização de espaços de trabalho. Ganchos personalizados e design modular para máxima flexibilidade."
     },
     {
+      id: 8, 
+      title: "Organizador de Console (VW Up!)",
+      category: "Impressão 3D",
+      image: "/imagens/console-vw-up.webp", // Salve a imagem do MakerWorld com este nome
+      description: "Solução de armazenamento sob medida para o console central do Volkswagen Up!. Produzido em PETG de alta resistência térmica para suportar o calor do interior do veículo sem deformar, unindo utilidade e durabilidade."
+    },
+    {
+      id: 7,
+      title: "Quilha de Surf Customizada",
+      category: "Impressão 3D",
+      image: "/imagens/quilha-surf.webp",
+      description: "Quilha de alto desempenho impressa em 3D. Produzida em PETG reciclável para garantir máxima resistência a impactos, durabilidade na água e flexibilidade ideal para o surf."
+    },
+    {
       id: 2,
       title: "Quadros Fotográficos Personalizados",
       category: "Arte em 3D (HueForge)",

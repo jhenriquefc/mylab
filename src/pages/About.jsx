@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import "../components/About/About.css";
 
-
 export default function About() {
   const [isVisible, setIsVisible] = useState(false);
 
@@ -17,7 +16,7 @@ export default function About() {
         <div className="about-image-side">
           <div className="image-scanner">
             <div className="scan-line"></div>
-            <img src="imagens/eu.jpg" alt="José Carvalho" className="profile-img" />
+            <img src="/imagens/eu.jpg" alt="José Carvalho" className="profile-img" />
             <div className="image-overlay-dark"></div>
             <div className="corner-decor top-left"></div>
             <div className="corner-decor bottom-right"></div>
@@ -38,7 +37,7 @@ export default function About() {
           <h1 className="about-title">José <span>Carvalho</span></h1>
           <h2 className="about-role">SAP Integration Specialist | React Developer</h2>
           
-        <div className="about-description">
+          <div className="about-description">
             <p>
               Sou um entusiasta de tecnologia apaixonado por transformar ideias criativas em soluções tangíveis. 
               Meu ecossistema de projetos vai muito além do código tradicional, abrangendo desde a construção de aplicativos e o desenvolvimento de interfaces modernas com <strong>React</strong>, até a arquitetura de sistemas.
@@ -57,7 +56,7 @@ export default function About() {
                 <div className="bar-bg"><div className="bar-fill" style={{width: '95%'}}></div></div>
               </div>
               <div className="dna-bar">
-                <div className="dna-label"> AI_INTEGRATION</div>
+                <div className="dna-label">AI_INTEGRATION</div>
                 <div className="bar-bg"><div className="bar-fill" style={{width: '90%'}}></div></div>
               </div>
               <div className="dna-bar">
@@ -80,7 +79,48 @@ export default function About() {
             </div>
           </div>
         </div>
+      </div>
 
+      {/* NOVO BLOCO: COMPROMISSO SOCIOAMBIENTAL */}
+      <div className={`about-eco-section ${isVisible ? "animate-in-up" : ""}`}>
+        <div className="eco-card">
+          
+          {/* LADO DA IMAGEM DO CARD ECO */}
+          <div className="eco-card-image">
+            {/* Tag da imagem com a classe de tratamento */}
+            <img src="/imagens/litoral-norte.jpg" alt="Litoral Norte SP" className="eco-img-element" />
+            
+            <div className="eco-image-overlay"></div>
+            <span className="eco-badge">♻️ Compromisso MyLab</span>
+          </div>
+          
+          {/* LADO DO TEXTO DO CARD ECO */}
+          <div className="eco-card-content">
+            <h2>Preservando o Litoral Norte (SP)</h2>
+            <p>
+              Acreditamos que a tecnologia só faz sentido se ajudar a construir um futuro melhor. 
+              No <strong>MyLab</strong>, nossa produção física é feita com <strong>Bioplástico PLA Premium</strong> (derivado de fontes renováveis) e <strong>PETG Reciclável</strong>, minimizando o impacto ambiental.
+            </p>
+            <p>
+              Mas queremos ir além de não poluir: queremos ajudar a restaurar. É por isso que destinamos parte dos lucros de todos os projetos de impressão 3D para o <strong>Instituto Argonauta</strong>, uma ONG dedicada à conservação costeira e ao resgate da vida marinha nas praias de Ubatuba, Caraguatatuba, São Sebastião e Ilhabela.
+            </p>
+            
+            <div className="eco-stats">
+              <div className="stat-item">
+                <span className="stat-value">PLA/PETG</span>
+                <span className="stat-label">Materiais Sustentáveis</span>
+              </div>
+              <div className="stat-item">
+                <span className="stat-value">Apoio</span>
+                <span className="stat-label">Instituto Argonauta</span>
+              </div>
+            </div>
+
+            <a href="https://institutoargonauta.org/new/" target="_blank" rel="noreferrer" className="eco-btn">
+              Acessar Portal da ONG ↗
+            </a>
+          </div>
+        </div>
       </div>
     </section>
   );

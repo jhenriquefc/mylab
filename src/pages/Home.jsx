@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import EcoBanner from "../components/EcoBanner/EcoBanner";
 import Hero from "../components/Hero/Hero";
 import Marquee from "../components/Marquee/Marquee";
 import ProjectsGrid from "../components/ProjectsGrid/ProjectsGrid";
@@ -19,6 +20,7 @@ export default function Home() {
     <main className={`home-wrapper ${isVisible ? "animate-in" : ""}`}>
       <Marquee />
       <Hero />
+      <EcoBanner />
       <ProjectsGrid />
       <SkillsMetrics />
       <Timeline />

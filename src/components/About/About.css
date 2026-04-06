@@ -1,13 +1,18 @@
+/* =========================================
+   PÁGINA SOBRE GERAL
+   ========================================= */
 .about-page {
   padding: 120px 20px 60px;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  align-items: center;
   overflow: hidden;
   background: radial-gradient(circle at 10% 20%, rgba(0, 255, 166, 0.03) 0%, transparent 40%);
 }
 
 .about-container {
   max-width: 1100px;
+  width: 100%;
   display: grid;
   grid-template-columns: 1fr 1.2fr;
   gap: 80px;
@@ -33,7 +38,7 @@
   transform: translateX(0) rotate(0deg);
 }
 
-/* --- TRATAMENTO DA IMAGEM --- */
+/* --- TRATAMENTO DA IMAGEM PRINCIPAL (SEU PERFIL) --- */
 .image-scanner {
   position: relative;
   border: 1px solid rgba(255, 255, 255, 0.1);
@@ -48,7 +53,6 @@
   transition: all 0.5s ease;
 }
 
-/* FILTRO DE SOBREPOSIÇÃO ESCURO */
 .image-overlay-dark {
   position: absolute;
   top: 0; left: 0; width: 100%; height: 100%;
@@ -56,7 +60,6 @@
   pointer-events: none;
 }
 
-/* EFEITO AO PASSAR O MOUSE (HOVER) */
 .image-scanner:hover .profile-img {
   filter: grayscale(0%) brightness(70%) contrast(110%);
   transform: scale(1.05);
@@ -67,7 +70,6 @@
   opacity: 1;
 }
 
-/* LINHA DE SCANNER */
 .scan-line {
   position: absolute;
   top: 0; left: 0; width: 100%; height: 4px;
@@ -83,7 +85,6 @@
   100% { top: 100%; }
 }
 
-/* DETALHES TECNICOS NA IMAGEM */
 .tech-specs {
   position: absolute;
   bottom: 10px; left: 10px;
@@ -135,8 +136,10 @@
 }
 
 /* CABEÇALHO E TEXTO */
-.about-title { font-size: 56px; color: #fff; line-height: 1; }
+.about-title { font-size: 56px; color: #fff; line-height: 1; margin: 5px 0; }
 .about-title span { color: #00ffa6; font-weight: 200; }
+
+.about-role { color: #94a3b8; font-size: 16px; margin-bottom: 20px; font-weight: normal; }
 
 .status-badge {
   display: flex; align-items: center; gap: 8px;
@@ -155,8 +158,217 @@
   100% { opacity: 1; }
 }
 
+.about-description p {
+  color: #94a3b8;
+  line-height: 1.6;
+  margin-bottom: 15px;
+}
+
+.about-description strong {
+  color: #e2e8f0;
+}
+
+.about-extras {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.extra-card {
+  font-family: 'Fira Code', monospace;
+  font-size: 12px;
+}
+
+.extra-label { color: #64748b; }
+.extra-value { color: #00ffa6; }
+.social-link a { color: #00d9ff; text-decoration: none; }
+.social-link a:hover { text-decoration: underline; }
+
+/* =========================================
+   SESSÃO ECO (INSTITUTO ARGONAUTA)
+   ========================================= */
+.about-eco-section {
+  width: 100%;
+  max-width: 1100px;
+  margin-top: 80px; 
+  opacity: 0;
+  transform: translateY(50px);
+  transition: all 1s cubic-bezier(0.16, 1, 0.3, 1) 0.5s;
+}
+
+.animate-in-up {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.eco-card {
+  display: flex;
+  background: rgba(2, 6, 23, 0.6);
+  border: 1px solid rgba(0, 255, 166, 0.2);
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  transition: transform 0.3s;
+}
+
+.eco-card:hover {
+  transform: translateY(-5px);
+  border-color: rgba(0, 255, 166, 0.4);
+}
+
+/* ÁREA DA IMAGEM E TRATAMENTOS TÉCNICOS */
+.eco-card-image {
+  flex: 1;
+  position: relative;
+  min-height: 300px;
+  overflow: hidden;
+}
+
+.eco-img-element {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+  /* Tratamento: Retira um pouco da cor e deixa mais escura para não quebrar a estética hacker */
+  filter: grayscale(40%) brightness(60%) contrast(110%);
+  transition: all 0.5s ease;
+}
+
+.eco-card:hover .eco-img-element {
+  /* No hover a imagem volta a ter um pouco mais de cor e dá um leve zoom */
+  filter: grayscale(10%) brightness(80%) contrast(110%);
+  transform: scale(1.05);
+}
+
+.eco-image-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to right, rgba(2, 6, 23, 0.1), rgba(2, 6, 23, 0.95));
+  z-index: 1;
+}
+
+.eco-badge {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  background: rgba(0, 255, 166, 0.1);
+  color: #00ffa6;
+  padding: 6px 12px;
+  border-radius: 4px;
+  font-size: 11px;
+  font-family: 'Fira Code', monospace;
+  border: 1px solid rgba(0, 255, 166, 0.3);
+  backdrop-filter: blur(5px);
+  z-index: 2;
+  text-transform: uppercase;
+}
+
+/* CONTEÚDO DE TEXTO DO CARD ECO */
+.eco-card-content {
+  flex: 1.2;
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+  z-index: 2;
+  background: rgba(2, 6, 23, 0.8);
+}
+
+.eco-card-content h2 {
+  color: #f8fafc;
+  font-size: 24px;
+  margin-bottom: 15px;
+}
+
+.eco-card-content p {
+  color: #94a3b8;
+  font-size: 14px;
+  line-height: 1.6;
+  margin-bottom: 15px;
+}
+
+.eco-card-content strong {
+  color: #00ffa6;
+  font-weight: normal;
+}
+
+.eco-stats {
+  display: flex;
+  gap: 30px;
+  margin-top: 15px;
+  margin-bottom: 25px;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  padding-top: 20px;
+}
+
+.stat-item {
+  display: flex;
+  flex-direction: column;
+}
+
+.stat-value {
+  color: #00d9ff;
+  font-size: 18px;
+  font-weight: bold;
+  font-family: 'Fira Code', monospace;
+}
+
+.stat-label {
+  color: #64748b;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-top: 4px;
+}
+
+.eco-btn {
+  align-self: flex-start;
+  padding: 10px 20px;
+  background: transparent;
+  color: #00ffa6;
+  border: 1px solid rgba(0, 255, 166, 0.5);
+  border-radius: 4px;
+  text-decoration: none;
+  font-family: 'Fira Code', monospace;
+  font-size: 12px;
+  transition: all 0.3s ease;
+}
+
+.eco-btn:hover {
+  background: rgba(0, 255, 166, 0.1);
+  box-shadow: 0 0 15px rgba(0, 255, 166, 0.2);
+  border-color: #00ffa6;
+}
+
+/* =========================================
+   RESPONSIVIDADE (Celular)
+   ========================================= */
 @media (max-width: 850px) {
-  .about-container { grid-template-columns: 1fr; }
+  .about-container { grid-template-columns: 1fr; gap: 40px;}
   .about-image-side { transform: translateY(-50px); }
   .about-text-side { transform: translateY(50px); }
+  
+  .eco-card {
+    flex-direction: column; 
+  }
+
+  .eco-card-image {
+    min-height: 200px;
+  }
+
+  .eco-image-overlay {
+    background: linear-gradient(to bottom, rgba(2, 6, 23, 0.1), rgba(2, 6, 23, 0.95));
+  }
+
+  .eco-card-content {
+    padding: 30px 20px;
+  }
+
+  .eco-card-content h2 {
+    font-size: 20px;
+  }
 }

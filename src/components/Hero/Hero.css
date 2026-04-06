@@ -1,45 +1,64 @@
 /* HERO SECTION */
 .hero {
-  min-height: 60vh; 
+  min-height: 70vh; /* Um pouco mais alto para dar respiro */
   display: flex;
   align-items: center;
   justify-content: center;
   text-align: center;
-  padding: 10px 20px 40px; 
+  padding: 60px 20px; 
   position: relative;
   z-index: 1;
 }
 
+/* TAG SUPERIOR TIPO TERMINAL */
 .hero-tag {
-  display: inline-block;
-  padding: 6px 12px;
-  background: rgba(0, 255, 166, 0.1);
-  border: 1px solid rgba(0, 255, 166, 0.3);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 16px;
+  background: rgba(0, 255, 166, 0.05);
+  border: 1px solid rgba(0, 255, 166, 0.2);
   color: #00ffa6;
-  border-radius: 20px;
-  font-size: 13px;
-  font-family: 'Segoe UI', sans-serif;
-  margin-bottom: 20px;
-  text-transform: uppercase;
-  letter-spacing: 1px;
+  border-radius: 4px; /* Mais "quadrado" e técnico */
+  font-size: 11px;
+  font-family: 'Fira Code', monospace;
+  margin-bottom: 30px;
+  letter-spacing: 1.5px;
+}
+
+/* Bolinha piscando de online */
+.live-dot {
+  width: 6px;
+  height: 6px;
+  background: #00ffa6;
+  border-radius: 50%;
+  box-shadow: 0 0 8px #00ffa6;
+  animation: pulseLive 1.5s infinite alternate;
+}
+
+@keyframes pulseLive {
+  0% { opacity: 0.3; }
+  100% { opacity: 1; }
 }
 
 .hero-title {
-  font-size: clamp(32px, 5vw, 64px);
-  color: #ffffff;
+  font-size: clamp(36px, 5vw, 68px); /* Um pouco maior no desktop */
+  color: #f8fafc;
   font-family: 'Segoe UI', sans-serif;
   font-weight: 800;
   max-width: 900px;
-  line-height: 1.1;
+  line-height: 1.15;
+  margin: 0 auto;
 }
 
 /* EFEITO TYPEWRITER */
 .typewriter {
   color: #00d9ff;
-  text-shadow: 0 0 15px rgba(0, 217, 255, 0.5);
+  text-shadow: 0 0 15px rgba(0, 217, 255, 0.4);
   border-right: 3px solid #9b5cff;
   padding-right: 5px;
   animation: blinkCursor 0.8s step-end infinite;
+  display: inline-block; /* Evita quebra de linha estranha */
 }
 
 @keyframes blinkCursor {
@@ -50,9 +69,9 @@
 .hero-subtitle {
   font-size: 18px;
   color: #94a3b8;
-  margin: 25px auto 40px; 
-  max-width: 600px;
-  text-align: center; 
+  margin: 30px auto 45px; 
+  max-width: 650px;
+  line-height: 1.6;
 }
 
 /* BOTÕES TECH */
@@ -60,7 +79,8 @@
   display: flex;
   gap: 20px;
   justify-content: center;
-  flex-wrap: wrap; /* Garante que os botões quebrem a linha se a tela for pequena */
+  align-items: center;
+  flex-wrap: wrap; 
 }
 
 /* Base comum para todos os botões no Hero */
@@ -69,65 +89,72 @@
   align-items: center;
   justify-content: center;
   text-decoration: none;
-  padding: 14px 28px;
-  border-radius: 5px;
-  transition: 0.3s;
+  padding: 14px 30px;
+  transition: all 0.3s ease;
+  font-family: 'Fira Code', monospace;
+  font-size: 13px;
+  letter-spacing: 0.5px;
 }
 
-/* 1. Primário (Foco total - Vendas) */
+/* 1. Primário (Botão fantasma com brilho) */
 .btn-primary {
-  background: linear-gradient(90deg, #00ffa6, #00d9ff);
-  border: none;
-  color: #020617;
-  font-weight: 700;
-  cursor: pointer;
-  box-shadow: 0 0 15px rgba(0, 255, 166, 0.4);
+  background: rgba(0, 255, 166, 0.05);
+  border: 1px solid #00ffa6;
+  color: #00ffa6;
+  font-weight: 600;
+  box-shadow: 0 0 15px rgba(0, 255, 166, 0.1);
+  position: relative;
+  overflow: hidden;
 }
 
 .btn-primary:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 0 25px rgba(0, 255, 166, 0.6);
+  background: #00ffa6;
+  color: #020617;
+  box-shadow: 0 0 25px rgba(0, 255, 166, 0.4);
+  transform: translateY(-2px);
 }
 
-/* 2. Secundário (Convencimento - Projetos) */
+/* 2. Secundário (Sutil, cinza para branco) */
 .btn-secondary {
   background: transparent;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  color: #ffffff;
-  font-weight: 600;
-  cursor: pointer;
+  border: 1px solid rgba(148, 163, 184, 0.3);
+  color: #cbd5e1;
 }
 
 .btn-secondary:hover {
   background: rgba(255, 255, 255, 0.05);
-  border-color: #ffffff;
-  transform: translateY(-3px);
+  border-color: #00d9ff;
+  color: #00d9ff;
+  transform: translateY(-2px);
 }
 
-/* 3. Terciário (Discreto - Download CV) */
+/* 3. Terciário (Discreto - Apenas texto) */
 .btn-tertiary {
   background: transparent;
-  border: 1px dashed rgba(148, 163, 184, 0.4); /* Borda tracejada e discreta */
-  color: #94a3b8; /* Cor mais apagada */
-  font-weight: 500;
-  cursor: pointer;
+  color: #64748b; 
 }
 
 .btn-tertiary:hover {
-  border-style: solid;
-  border-color: #00d9ff;
   color: #ffffff;
+  text-shadow: 0 0 8px rgba(255, 255, 255, 0.5);
 }
 
 /* Responsividade para Mobile */
 @media (max-width: 650px) {
+  .hero {
+    min-height: 60vh;
+    padding: 40px 20px;
+  }
+
   .hero-buttons {
     flex-direction: column;
     gap: 15px;
-    padding: 0 10px;
+    width: 100%;
+    max-width: 350px;
+    margin: 0 auto;
   }
   
   .hero-buttons a {
-    width: 100%; /* Faz os botões ocuparem 100% da largura no celular */
+    width: 100%; 
   }
 }

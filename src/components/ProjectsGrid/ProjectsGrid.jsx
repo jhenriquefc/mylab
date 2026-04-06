@@ -1,43 +1,45 @@
+import { Link } from "react-router-dom";
 import "./ProjectsGrid.css";
 
 export default function ProjectsGrid() {
   const solutions = [
     {
       id: 1,
-      title: "Integração de Sistemas & Cloud",
-      desc: "Arquitetura e desenvolvimento de integrações escaláveis. Experiência sólida em SAP Integration Suite (CPI) e transição de sistemas legados para a nuvem. Criação de fluxos robustos para alta disponibilidade de dados corporativos.",
+      title: "Prototipagem & 3D",
+      desc: "Materializamos ideias. Produção de peças técnicas, cases, suportes e acessórios em bioplástico com precisão milimétrica.",
       size: "large",
-      techs: ["SAP CPI", "APIs REST", "OData", "Cloud Architecture"],
-      icon: "🌐",
-      type: "single",
-      // Troque pelo nome exato da sua imagem na pasta public/imagens
-      image: "/imagens/integracao-sap.png" 
-    },
-    {
-      id: 2,
-      title: "Desenvolvimento Web & Interfaces",
-      desc: "Criação de sites, portfólios e aplicações web sob medida. Foco em performance, design focado em conversão e experiência de usuário (UX/UI).",
-      size: "medium",
-      techs: ["React", "Frontend", "UI/UX", "Python"],
-      icon: "💻",
-      type: "single",
-      image: "/imagens/giftlitoral-site.png"
-    },
-    {
-      id: 3,
-      title: "Impressão 3D & Prototipagem",
-      desc: "Transformando ideias em objetos físicos reais. Serviços de modelagem e impressão 3D sob demanda",
-      size: "medium",
-      techs: ["Modelagem 3D", "Impressão FDM", "Prototipagem"],
+      techs: ["PETG Reciclável", "PLA Premium", "Modelagem 3D"],
       icon: "🖨️",
       type: "grid",
-      // Coloque o nome das 4 imagens diferentes da impressora/peças
+      linkTo: "/projetos",
       images: [
         "/imagens/3d-peca1.jpeg",
         "/imagens/3d-peca2.jpeg",
         "/imagens/3d-peca5.jpeg",
         "/imagens/3d-peca4.jpeg"
       ]
+    },
+    {
+      id: 2,
+      title: "Desenvolvimento Web",
+      desc: "Sites performáticos e aplicações sob medida. Focamos em design responsivo e experiência de usuário para destacar o seu negócio na internet.",
+      size: "medium",
+      techs: ["React", "E-commerce", "UX/UI"],
+      icon: "💻",
+      type: "single",
+      // Sugestão: Uma foto de um site rodando em um monitor ou notebook
+      image: "/imagens/giftlitoral-site.png" 
+    },
+    {
+      id: 3,
+      title: "Engenharia & Hardware",
+      desc: "Soluções práticas para o seu setup. Automações locais, consertos e adaptações de peças eletrônicas para equipamentos e ferramentas.",
+      size: "medium",
+      techs: ["Eletrônica", "Projetos Físicos", "Automação"],
+      icon: "⚙️",
+      type: "single",
+      // Sugestão: Uma foto da sua mesa de trabalho, com solda ou fios, ou algo da sua loja
+      image: "/imagens/hardware-setup.jpeg"
     }
   ];
 
@@ -49,44 +51,52 @@ export default function ProjectsGrid() {
       </div>
 
       <div className="bento-grid">
-        {solutions.map((solution) => (
-          <div key={solution.id} className={`bento-card ${solution.size}`}>
-            
-            {/* RENDERIZAÇÃO DAS IMAGENS */}
-            {solution.type === "single" ? (
-              <div className="card-image-single">
-                <img src={solution.image} alt={solution.title} loading="lazy" />
-              </div>
-            ) : (
-              <div className="card-image-grid">
-                {solution.images.map((imgUrl, index) => (
-                  <div key={index} className="grid-img-wrapper">
-                    <img src={imgUrl} alt={`Amostra 3D ${index + 1}`} loading="lazy" />
-                  </div>
-                ))}
-              </div>
-            )}
-
-            {/* CONTEÚDO DE TEXTO */}
-            <div className="card-content">
-              <div className="card-header">
-                <div className="card-icon">{solution.icon}</div>
-                <h3>{solution.title}</h3>
-              </div>
-              <p>{solution.desc}</p>
+        {solutions.map((solution) => {
+          const CardWrapper = solution.linkTo ? Link : 'div';
+          
+          return (
+            <CardWrapper 
+              to={solution.linkTo} 
+              key={solution.id} 
+              className={`bento-card ${solution.size} ${solution.linkTo ? 'clickable-card' : ''}`}
+            >
               
-              <div className="tech-tags">
-                {solution.techs.map((tech, index) => (
-                  <span key={index} className="tech-tag">
-                    {tech}
-                  </span>
-                ))}
+              {/* RENDERIZAÇÃO DAS IMAGENS */}
+              {solution.type === "single" ? (
+                <div className="card-image-single">
+                  <img src={solution.image} alt={solution.title} loading="lazy" />
+                </div>
+              ) : (
+                <div className="card-image-grid">
+                  {solution.images.map((imgUrl, index) => (
+                    <div key={index} className="grid-img-wrapper">
+                      <img src={imgUrl} alt={`Amostra 3D ${index + 1}`} loading="lazy" />
+                    </div>
+                  ))}
+                </div>
+              )}
+
+              {/* CONTEÚDO DE TEXTO */}
+              <div className="card-content">
+                <div className="card-header">
+                  <div className="card-icon">{solution.icon}</div>
+                  <h3>{solution.title}</h3>
+                </div>
+                <p>{solution.desc}</p>
+                
+                <div className="tech-tags">
+                  {solution.techs.map((tech, index) => (
+                    <span key={index} className="tech-tag">
+                      {tech}
+                    </span>
+                  ))}
+                </div>
               </div>
-            </div>
-            
-            <div className="card-border-glow"></div>
-          </div>
-        ))}
+              
+              <div className="card-border-glow"></div>
+            </CardWrapper>
+          );
+        })}
       </div>
     </section>
   );

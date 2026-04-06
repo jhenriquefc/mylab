@@ -1,45 +1,38 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
-// Componentes Globais (Ficam fora das Routes para aparecerem sempre)
+// Componentes Globais
 import Header from "./components/Header/Header";
 import Footer from "./components/Footer/Footer";
 import FundoCircuito from "./components/FundoCircuito"; 
+import EcoBanner from "./components/EcoBanner/EcoBanner"; 
+import ScrollToTop from "./components/ScrollToTop"; // <-- 1. Importe aqui
 
-// Páginas (O conteúdo que muda conforme a URL)
+// Páginas
 import Home from "./pages/Home"; 
 import ContactPage from "./pages/ContactPage";
 import About from "./pages/About";
 import Projects from "./pages/Projects";
 
-// CSS Global
 import "./App.css";
 
 function App() {
   return (
     <Router>
+      {/* 2. Coloque ele AQUI, dentro do Router, antes de tudo! */}
+      <ScrollToTop />
+      
       <div className="App">
-        {/* 1. O Fundo fica aqui para ser a base de tudo */}
         <FundoCircuito />
-
-        {/* 2. O Header fica fixo no topo */}
         <Header />
         
-        {/* 3. Aqui o React Router decide qual conteúdo exibir */}
         <Routes>
-          {/* Página Inicial (Hero, Projetos, Timeline, etc) */}
           <Route path="/" element={<Home />} />
-          
-          {/* Página de Contato (Formulário JSON) */}
           <Route path="/contato" element={<ContactPage />} />
-
-          {/* Página Sobre (Perfil e Hobbies) */}
           <Route path="/sobre" element={<About />} />
-          
-          {/* Página de Projetos (Galeria de fotos) */}
           <Route path="/projetos" element={<Projects />} />
         </Routes>
 
-        {/* 4. O Footer fica fixo no rodapé */}
+        <EcoBanner />
         <Footer />
       </div>
     </Router>
